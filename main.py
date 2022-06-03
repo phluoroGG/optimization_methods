@@ -185,6 +185,7 @@ def newton(a, b, step):
         dy2 = numerical_derivative_yy(a, b, function_, step)
         dxdy = numerical_derivative_xy(a, b, function_, step)
         determinant = dx2 * dy2 - dxdy ** 2
+        assert dx2 > 0 and determinant > 0, 'The hesse matrix is not positive definite'
         a -= 1 / determinant * (dy2 * gradient[0] - dxdy * gradient[1])
         b -= 1 / determinant * (dx2 * gradient[1] - dxdy * gradient[0])
         gradient = [numerical_derivative_x(a, b, function_, step),
